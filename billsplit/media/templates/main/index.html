@@ -1,0 +1,58 @@
+{% load fbconnect %}
+<html>
+<head>
+    <!-- JS Files -->
+    <script type="text/javascript" src="{{ MEDIA_URL }}templates/main/js/jquery.js"></script>
+    {% facebook_login_script %}
+    <!-- Document Ready functions -->
+    <script type="text/javascript">
+        //functions which are done when the document is ready
+      $(function(){
+          fbconnected(function(){
+              // connected to facebook
+          },function(){
+              // not connected to facebook
+              fblogin(fblogin_success,fblogin_fail);
+          });
+      });
+    </script>
+    <script type="text/javascript">
+    fblogin_success = function(){
+        //logged in user
+      FB.api('/me', function(response) { 
+          $('#name').html(response.name);
+          $('#first_name').html(response.first_name);
+          $('#last_name').html(response.last_name);
+          $('#link').html(response.link);
+          $('#birthday').html(response.birthday);
+          $('#gender').html(response.gender);
+          $('#timezone').html(response.timezone);
+          $('#locale').html(response.locale);
+          $('#verified').html(''+response.verified);
+          $('#updated_time').html(response.updated_time);
+          $('#other_information').show();
+      });
+    }
+    fblogin_fail = function(){
+          //guest
+    }
+    </script>
+</head>
+<body>
+    {% facebook_load_script %}
+    <div>Hello
+    <span id="name">Guest</span>!<br />
+    <div id="other_information" style="display: none;">         
+        First Name: <span id="first_name"></span><br />
+        Last Name: <span id="last_name"></span><br />
+        Link: <span id="link"></span><br />
+        Birthday: <span id="birthday"></span><br />
+        Gender: <span id="gender"></span><br />
+        Timezone: <span id="timezone"></span><br />
+        Locale: <span id="locale"></span><br />
+        Verified: <span id="verified"></span><br />
+        Updated Time: <span id="updated_time"></span><br />
+    </div>
+</div>
+</body>
+</html>

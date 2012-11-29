@@ -1,0 +1,525 @@
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+
+#brand {
+	margin-left: 39%;
+	width: 18%;
+  	color: #fff;
+  	text-decoration: none;
+}
+.sidebar-nav {
+        padding: 9px 0;
+}
+
+.nav .nav-header {
+	padding: 0px;
+	text-decoration: underline;
+}
+
+.navbar-search {
+	margin-top: 0px;
+	margin-right: 8px;
+}
+@charset "utf-8";
+
+/* Welcome to my website, I hope you like it. If not, too bad.
+ */
+
+/*
+ * -----Basic information-----*/
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+html,body {
+	font-family: "Kotta One", Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	font-size: 15px;
+	text-align: left;
+	line-height: 1;
+	height: 100%;
+}
+
+p  {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	line-height: 16px;
+}
+
+bold	{
+	font-weight: bold;
+}
+footer {
+	padding: 0 10px 0 10px;
+	border-top: 1px solid #eee;
+	color: white;
+	background-color: #333333;
+}
+footer > p {
+	margin-bottom: 11px;
+	margin-top: 13px;
+}
+.wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -43px;
+	min-width: 1100px;
+}
+.wrapper > .container-fluid {
+	padding-top: 0px;
+}
+.push { 
+	height: 63px; 
+}
+
+/*
+ * -----Titles-----*/
+
+h1 {
+	font-size: 28px;
+	font-weight: normal;
+	font-family: "Myriad Pro", Helvetica, Arial, sans-serif;
+	color: #333;
+	line-height: 25px;
+	font-weight: bold;
+	width: auto;
+	text-align: center;
+}
+h1 a:link, h1 a:visited, h1 a:hover, h1 a:active{
+	color: #333;
+	text-decoration: none;
+}
+h2 {
+	font-size: 22px;
+	font-weight: normal;
+	font-family: "Myriad Pro", Helvetica, Arial, sans-serif;
+	color: #333;
+	line-height: 20px;
+	width: auto;
+}
+h2 a:link, h2 a:visited, h2 a:hover, h2 a:active {
+	text-decoration: none;
+}
+h3 {
+	margin: 0;
+	padding: 0;
+	font-size: 18px;
+	font-weight: normal;
+	font-family: "Myriad Pro", Helvetica, Arial, sans-serif;
+	color: #000;
+	text-transform: uppercase;
+	line-height: 20px;
+}
+h3 a:link, h3 a:visited, h3 a:hover, h3 a:active {
+  text-decoration:  none;
+  font-weight:      bold;
+  color:            #000;
+}
+
+
+/*
+ * -----Layout----*/
+
+#container {
+	position: relative;
+	width: 100%;
+	min-height: 100%;
+	margin-left:0%;
+	margin: 0;
+	background-color: #FFF;
+	text-align: left;
+}
+#innercontainer{
+	min-width: 1024px;
+	height:100%;
+	margin: 0 auto 0 auto;
+}
+#topcontainer{
+	
+	height:100%;
+}
+#main {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	margin-top: 20px;
+}
+#header{
+	height: 110px;
+	width:100%;
+	box-shadow: 0 4px 8px 1px #002255;
+	background-color: #690000;
+}
+#logo{
+}
+#header-menu{
+	position:relative;
+	float: right;
+	top: 50px;
+	right: 12%;
+}
+#subject{
+	position:relative;
+	float:left;
+	font-size: 30px;
+	width: 77%;
+	margin-top: 15px;
+	margin-left: 12%;
+	font-weight:bold;
+	color: #003380;
+}
+#subject.a{
+	text-decoration:none;
+	margin-left: 12%;
+	font-weight:bold;
+	color: #003380;
+	cursor:pointer;
+}
+#social{
+	position:relative;
+	float:right;
+	width: 175px;
+	margin-top: 15px;
+	margin-right: 12%;
+	border-bottom: 3px solid #003380;
+}
+.socialicons{
+	position:relative;
+	float:right;
+	width: 31px;
+	height:31px;
+	margin:3px;
+}
+#middle{
+	
+}
+#next{
+	position:absolute;
+	top: 120px;
+	right:30px;
+	height:70%;
+	z-index: 1;
+}
+#nextbutton{
+	margin-top:150px;
+}
+#openingtable{
+	table-layout:fixed;
+	width:70%;
+	height:40%;
+	
+	display: block;
+}
+#middle{
+	position relative;
+	margin:10px auto 10px auto;
+	width:700px;
+}
+.screenshots{
+	width:370px;
+	height:217px;
+}
+.screenshot{
+		
+}
+#description{
+	position: absolute;
+	top: 100px;
+	left: 12%;
+	height: 200px;
+	width: 150px;
+	color: #000;
+}
+#descriptionheader{
+	font-weight: bold;
+}
+#sitedescription{
+}
+
+/*
+ * -----About Me-----*/
+#aboutdiv{
+	font-family: "Kotta One", Arial, Helvetica, sans-serif;
+	color: #000;
+	font-size: 18px;
+	width: 100%;
+	height: 100%;
+}
+#aboutme{
+	position:relative;
+	text-align: left;
+	float: left;
+	margin-left: 12%;
+	margin-right:0px;
+	width: 35%;
+	text-align:center;
+}
+#buslinks{
+	position:relative;
+	text-align: center;
+	text-decoration:none;
+	float: left;
+	margin-left: 12%;
+	margin-right: 3%;
+	margin-top:3%;
+	width: 35%;
+}
+#buslinks a{
+	font-size: 22px;
+	font-weight: bold;
+	color: #003380;
+	text-decoration: none;
+}
+#image{
+	position: relative;
+	float:right;
+	margin: 3% 12% 0 0;
+	top:1.5%;
+	width: 27%;
+	height: 60%;
+}
+#mypicture{
+	position: relative;
+	float: right;
+	margin:0 auto 0 auto;
+	height:100%;
+	width:100%;
+}
+
+/*
+ * -----Contact Me-----*/
+#contactdiv{
+	width: 100%;
+	height: 100%;
+}
+#email{
+	position: relative;
+	height: 100%;
+	margin: 0 30%;
+}
+#emailform{
+	position: relative;
+	float:left;
+	text-align:center;
+}
+#comments{
+	background: #003380;
+	color: #fff;
+	font-size: 18px;
+	opacity: 0.75;
+	font-family: "Kotta One", Arial, Helvetica, sans-serif;
+}
+#submit{
+	position:relative;
+	margin: 0 auto;
+	width:200px;
+	height:75px;
+	font-size:18px;
+	font-family: "Kotta One", Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #003380;
+}
+#main_area{
+	margin-left:0px;
+}
+#center{
+	margin:0 auto;
+}
+#subtitle{
+	text-align:center;
+}
+#nav_menu{
+	margin-top: 4%;
+	font-size: 18px;
+}
+.list_format {
+	list-style-type:none;
+	padding-left: 20px;
+	margin: 30px;
+}
+.event-button{
+	width: 85%;
+}
+.item-button {
+	width:15%;
+}
+.edit_holder {
+}
+.comments_button {
+	width: 5%;
+	margin-top: 15px;
+	margin-left: 4%;
+	float:left;
+}
+.edit_item_button {
+	width: 3%;
+	margin-top: 17px;
+	margin-left: 8%;
+	float:left;
+}
+.item-score-buttons {
+	float:left;
+}
+.item-score {
+	  display: block;
+	  margin: 0;
+	  font-size: 26px;
+	  line-height: 20px;
+	  word-break: break-all;
+	  word-wrap: break-word;
+	  white-space: pre;
+	  white-space: pre-wrap;
+	  background-color: #fff;
+}
+.item-score-vote {
+	  display: inline-block;
+	  padding: 2px 8px;
+	  margin-bottom: 0;
+	  font-size: 26px;
+	  line-height: 14px;
+	  color: #333333;
+	  text-align: center;
+	  vertical-align: middle;
+	  cursor: pointer;
+	  border: none;
+	  background-color: #fff;
+
+}
+.my-item-details {
+	width: 65%;
+	height: 60%;
+	margin-left: .3%;
+	margin-top: 10px;
+	padding: 0px 35px 2px 14px;
+	float:left;
+  	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  	border: 1px solid #fbeed5;
+  		-webkit-border-radius: 4px;
+    	-moz-border-radius: 4px;
+         border-radius: 4px;
+    color: #0066ff;
+  	background-color: #aaccff;
+  	border-color: #2a7fff;
+}
+
+.item-details {
+	width: 65%;
+	height: 60%;
+	margin-left: 11.3%;
+	margin-top: 10px;
+	padding: 0px 35px 2px 14px;
+	float:left;
+  	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  	border: 1px solid #fbeed5;
+  		-webkit-border-radius: 4px;
+    	-moz-border-radius: 4px;
+         border-radius: 4px;
+    color: #3a87ad;
+  	background-color: #d9edf7;
+  	border-color: #bce8f1;
+}
+.item{
+	width:96%;
+	margin-left: 3%;
+	height: 65px;
+}
+.list-nav {
+	width:20%;
+	margin-left:5%;
+	margin-top: -40px; 
+}
+.item_creator{
+	width:25%;
+	float:left;
+}
+.item_name{
+	width:20%;
+	float:left;
+}
+.item_details{
+	width:38%;
+	float:left;
+}
+.item_cost{
+	width:17%;
+	float:left;
+}
+.initiallyHidden { 
+	display: none; 
+}
+#list {
+}
+.change_input {
+	width: 15%;
+}
+.comments {
+	width: 62%;
+	margin: 0 auto;
+}
+#home {
+	position: relative;
+	margin-top: -10px;
+	margin-left: 50px;
+}
+#navigation_area {
+	margin-left: 10%;
+	width: 80%;
+}
+.invite-choice {
+	float:left;
+	width: 200px;
+	margin-left: 150px;
+}
+.half-form {
+	position:relative;
+	float:left;
+	margin:0px;
+	padding-left: 5%;
+	width:50%;
+}
+.new_item_button{
+	margin-left: 8%;
+}
+.invite_button{
+	margin-left: 47%;
+}
+.event_buttons{
+	position: absolute;
+	width:80%;
+	margin-left: 10%;
+	margin-top: 3%;
+}
+.invite_friend{
+	margin-left: 60%;
+}
+
+.invite_form{
+	position:relative;
+	width:30%;
+	float:right;
+}

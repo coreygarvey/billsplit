@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+
+{% block title %}Invite A Friend{% endblock %}
+{% block head %}Invite A Friend{% endblock %}
+
+{% block content %}
+<a id="home" class="btn btn-inverse" href="/home/"><i class="icon-home icon-white"></i> Home</a>
+<div class="row-fluid">
+	<div id="navigation_area" class="span12 pagination-centered">
+		<h1>Invite a friend</h1>
+		<form method="post" action=".">
+
+				<label for="id_name"><h4>Name</h4></label> 
+				<input id="id_name" type="text" name="name" maxlength="50" />  
+				<br />
+				<label for="id_email"><h4>Email</h4></label> 
+				<input id="id_email" type="text" name="email" maxlength="50" /><br />
+				<br />
+				{% csrf_token %}
+				<button class="btn" type="submit">Send Invite</button>
+		</form>
+	</div>
+</div>
+{% endblock %}

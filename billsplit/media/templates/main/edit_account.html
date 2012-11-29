@@ -1,0 +1,53 @@
+{% extends "main/homebase.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block center-header %}
+    <div id="account-header" class="large-header">
+        <h4>Account Details</h4>
+    </div>
+{% endblock %}    
+{% block center %}    
+    <div class="center-area">
+        <div class="center-wrapper">
+            <div class="account-details">
+                <form method="post" action=".">
+                    <input id="id_user" type="hidden" name="id" maxlength="10" class="input-row" value={{user.id}} />
+                    {% if form.errors %}
+                    <div class="form-row">
+                        <h2>Sorry, there was an error, try again.</h2>
+                    </div>
+                    {% endif %}
+                    <div class="form-row">
+                        <h2>Username:</h2>
+                        <input id="id_username" type="text" name="username" maxlength="30" class="input-row" value={{user.username}} />
+                    </div>
+                    
+                    <div class="form-row">
+                        <h2>First Name:</h2>
+                        <input id="id_username" type="text" name="first_name" maxlength="30" class="input-row" value={{user.first_name}} />
+                    </div>
+                    
+                    <div class="form-row">
+                        <h2>Last Name:</h2>
+                        <input id="id_username" type="text" name="last_name" maxlength="30" class="input-row" value={{user.last_name}} />
+                    </div>
+                    
+                    <div class="form-row">
+                        <h2>PayPal Email:</h2>
+                        <input id="id_username" type="text" name="email" maxlength="30" class="input-row" value={{user.email}} />
+                    </div>
+                    {% csrf_token %}
+                    <input class="account-edit-pword-button" value="Edit Account" type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block right %}
+{% endblock %}
+
+
+
+

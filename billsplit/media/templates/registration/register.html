@@ -1,0 +1,64 @@
+{% extends "main/base2.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="open">
+        
+        <div class="open-area">
+            <div class="register-header">
+                <img src="{{ MEDIA_URL }}templates/main/images/register.png"/>
+            </div>
+        <div class="register-form-wrapper">
+    <form action="" method="post">
+        <div class="form-padding">
+            <div class="form-row">
+        {{ form.first_name.errors }}
+        <label for="id_first_name" class="biglabel"><h4>First Name</h4></label> 
+        <input id="id_first_name" type="text" name="first_name" maxlength="30" class="input-row" />
+        </div>
+         <div class="form-row">
+        {{ form.last_name.errors }}
+        <label for="id_last_name" class="biglabel"><h4>Last Name</h4></label> 
+        <input id="id_last_name" type="text" name="last_name" maxlength="30" class="input-row"/> 
+        </div>
+        <div class="form-row">
+        {{ form.username.errors }}
+        <label for="id_username" class="biglabel"><h4>Username</h4></label> 
+        <input id="id_username" type="text" name="username" maxlength="30" class="input-row"/>
+        </div>
+        <div class="form-row">
+        <span class="helptext"></span>
+        {{ form.password2.errors }}
+        <label for="id_password1" class="biglabel"><h4>Password</h4></label> 
+        <input type="password" name="password1" id="id_password1" class="input-row"/>
+        </div>
+        <div class="form-row">
+        <label for="id_password2" class="biglabel"><h4>Confirm</h4></label> 
+        <input type="password" name="password2" id="id_password2" class="input-row"/> 
+        </div>
+        <div class="form-row">
+        <span class="helptext"></span>
+        {{ form.email.errors }}
+        <label for="id_email" class="biglabel"><h4>Paypal Email</h4></label> 
+        <input id="id_email" type="text" name="email" maxlength="30" class="input-row"/>
+        </div>
+        <div class="submit-row"> 
+        {% csrf_token %}
+        <button class="login-button" type="submit">Sign me up</button>
+    </div>
+    </form>
+</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<script src="https://www.paypalobjects.com/js/external/dg.js"></script>
+<script> 
+    dgFlow = top.dgFlow || top.opener.top.dgFlow; 
+	dgFlow.closeFlow(); 
+	top.close();
+	top.location.href='http://localhost:8000/register';
+</script>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "main/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+  <div id="navigation_area" class="span12 pagination-centered">
+  {% if form.errors %}
+    <p class="error">Sorry, your login information was incorrect</p>
+  {% endif %}
+
+    <form action="" method="post">
+      {% csrf_token %}
+      <label for="username"><h4>Username</h4></label>
+      <input type="text" name="username" value="" id="username">
+      <label for="password"><h4>Password</h4></label>
+      <input type="password" name="password" value="" id="password">
+      <br />
+      <input type="submit" class="btn btn-inverse" value="Login" />
+      <input type="hidden" name="next" value="/home/"/>
+    </form>
+    <br />
+    <h3>OR</h3>
+    <br />
+    <input id="front_button" class="btn btn-inverse" type="button" value="Register" onclick="location.href='/register/'" />
+  </div>
+</div>
+{% endblock %}

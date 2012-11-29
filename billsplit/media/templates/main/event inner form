@@ -1,0 +1,133 @@
+event inner form
+
+<div class="btn-group">
+				<form action="" method="post">
+				<input id="id_item_id" type="hidden" name="item_id" value= {{ 	item.id }} />
+
+				<input id="id_event" type="hidden" name="event" value= {{ event.id }} />
+
+				<input id="id_creator" type="hidden" name="creator" value= {{ user.id }} />
+
+
+				<div class="btn-group btn-group-vertical item_score_buttons">
+			    <button id={{item.id}} class="btn btn-success btn-mini item_score_button_{{item.id}}" type="button"><i class="icon-chevron-up icon-white"></i></button>
+
+			    <button id={{item.id}} class="btn btn-mini" type="button">{{item.score}}</button>
+
+			    <button id={{item.id}} class="btn btn-mini btn-danger  item_score_button_{{item.id}}" type="button"><i class="icon-chevron-down icon-white"></i></button>
+			    </div>
+				
+
+				
+
+			  <span class="initiallyHidden item_done_{{item.id}}">
+				<button class="btn btn-info item-button item_done_button" id={{item.id}} type="button">No Changes</button>
+			</span>
+			  <button href="creator" class="btn item-button" type="button">	
+			  	{{item.creator.first_name}} {{item.creator.last_name}}
+			  </button>
+			  
+			  
+			  <button  id={{item.id}} class="btn item-button name_change_button name_change_button_{{item.id}}" type="button">
+			  	{{item.name}}
+			  </button>
+
+			  	<span class="initiallyHidden change_name_{{item.id}}">
+				  <input class="change_input input-medium" id="id_name" size="16" type="text" name="name" placeholder={{item.name}} maxlength="50" value={{item.name}}>
+				  
+				</span>
+				
+			  	
+			  <button id={{item.id}} class="btn item-button cost_change_button cost_change_button_{{item.id}}" type="button">
+			  	${{item.cost}}
+			  </button>
+
+			  <span class="initiallyHidden change_cost_{{item.id}}">
+				  <input class="change_input input-medium" id="id_cost" size="16" type="text" name="cost" placeholder={{item.cost}} maxlength="10" value={{item.cost}}>
+				</span>
+
+			  <button id={{item.id}} class="btn item-button details_change_button details_change_button_{{item.id}}" type="button">
+			  	{{item.details}}
+			  </button>
+
+			  <span class="initiallyHidden change_details_{{item.id}}">
+				  <input class="change_input input-medium" id="id_details" size="16" type="text" name="details" placeholder={{item.details}} value={{item.details}}>
+				</span>
+
+			  <button id={{item.id}} class="btn item-button comments_button item-button comments_button_{{item.id}" type="button">
+			  	Comment
+			  </button>
+
+				
+				<button id={{item.id}} class="btn btn-warning item_change_button item_change_button_{{item.id}} item-button" type="button">Change</button>
+
+				<span class="initiallyHidden item_submit_{{item.id}}">
+				<button class="btn btn-success item-button" type="submit">Submit</button>
+			</span>
+				
+			  	{% csrf_token %}
+			  </form>
+
+			</div>
+			<br />
+			
+
+			<div class="initiallyHidden comments comments_{{item.id}} alert alert-info">
+
+				{% if item.comment_set.all %}
+				<button id={{item.id}} class="btn new_comment_button item-button" type="button">Add Comment</button>
+				<div class="new_comment initiallyHidden">
+
+					<form action="" method="post">
+
+						<input id="id_comment_id" type="hidden" name="comment_id" value='-1' />
+
+						<input id="id_creator" type="hidden" name="creator" value= {{ user.id }} />
+
+						<label for="id_content"><h4>Comment</h4></label> 
+						<textarea id="id_content" type="text" name="content" maxlength="50" ></textarea>
+
+						
+						<input id="id_item" type="hidden" name="item" value= {{ item.id }} />
+
+						<input id="id_event" type="hidden" name="event" value= {{ event.id }} />
+
+						<br />
+						{% csrf_token %}
+						<input class="btn" type="submit" value="Comment">
+					</form>
+				</div>
+				{% for comment in item.comment_set.all %}					
+				<h4>{{comment.creator}}</h4>
+				<p>{{comment.content}}</p>
+				{% endfor %}
+				
+				{% else %}
+				<div class="new_comment">
+
+					<form action="" method="post">
+
+						<input id="id_comment_id" type="hidden" name="comment_id" value='-1' />
+
+						<input id="id_creator" type="hidden" name="creator" value= {{ user.id }} />
+
+						<label for="id_content"><h4>Comment</h4></label> 
+						<textarea id="id_content" type="text" name="content" maxlength="50" ></textarea>
+
+						
+						<input id="id_item" type="hidden" name="item" value= {{ item.id }} />
+
+						<input id="id_event" type="hidden" name="event" value= {{ event.id }} />
+
+						<br />
+						{% csrf_token %}
+						<input class="btn" type="submit" value="Comment">
+					</form>
+				</div>
+
+				{% endif %}
+			</div>
+			{% endfor %}
+		
+		
+	</div>

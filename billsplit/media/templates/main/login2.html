@@ -1,0 +1,64 @@
+{% extends "main/base2.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="register">
+        <div class="register-form">
+    {% if user.is_authenticated %}
+
+    <h2>Hey, {{ user.first_name }}.</h2>
+
+    {% endif %}
+
+    {% if form %}
+        <div class="register-form-wrapper">
+    <form action="" method="post">
+        <div class="form-padding">
+            <div class="form-row">
+        <label for="id_first_name" class="biglabel"><h4>First Name</h4></label> 
+        <input id="id_first_name" type="text" name="first_name" maxlength="30" class="input-row"/>
+        </div>
+         <div lass="form-row">
+        <label for="id_last_name" class="biglabel"><h4>Last Name</h4></label> 
+        <input id="id_last_name" type="text" name="last_name" maxlength="30" class="input-row"/> 
+        </div>
+        <div lass="form-row">
+        {{ form.username.errors }}
+        <label for="id_username" class="biglabel"><h4>Username</h4></label> 
+        <input id="id_username" type="text" name="username" maxlength="30" class="input-row"/>
+        </div>
+        <div lass="form-row">
+        <span class="helptext"></span>
+        {{ form.password2.errors }}
+        <label for="id_password1" class="biglabel"><h4>Password</h4></label> 
+        <input type="password" name="password1" id="id_password1" class="input-row"/>
+        </div>
+        <div lass="form-row">
+        <label for="id_password2" class="biglabel"><h4>Password confirmation</h4></label> 
+        <input type="password" name="password2" id="id_password2" class="input-row"/> 
+        </div>
+        <div lass="form-row">
+        <span class="helptext"></span>
+        {{ form.email.errors }}
+        <label for="id_email" class="biglabel"><h4>Email</h4></label> 
+        <input id="id_email" type="text" name="email" maxlength="30" class="input-row"/>
+        </div>
+        <div class="submit-row"> 
+        {% csrf_token %}
+        <button class="btn btn-inverse" type="submit">Sign me up</button>
+    </div>
+    </form>
+</div>
+    {% else %}
+
+    <form action="https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay" target="PPDGFrame"> 
+        <input id="type" type="hidden" name="expType" value="light"> 
+        <input id="paykey" type="hidden" name="paykey" value="{{paykey}}">
+        <input type="submit" id="submitBtn" value="Pay with PayPal">    
+    </form>
+        </div>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}

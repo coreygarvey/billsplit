@@ -1,0 +1,689 @@
+{% extends "main/base2.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block nav %}
+<div class="nav-options">
+    <span class="nav-choice">
+        <a href="/logout/">Logout</a>
+    </span>
+    <span id="account-button" class="account-choice">
+        <a href="/my_account/">My Account</a>
+    </span>
+</div>
+{% endblock %}
+
+{% block content %}
+            
+            <div class="logo">
+                <div class="logo-area">
+                    <div class="logo-wrapper">
+                        <div class="logo-title">
+                            <a href="/home"/><img src="{{ MEDIA_URL }}templates/main/images/logo.png"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="top">
+                <div class="top-area">
+                    <div class="top-wrapper">
+                            {% block top %}
+                            {% endblock %}
+                    </div>
+                </div>
+            </div>            
+            <div class="left">
+                <div class="event-header">
+                    <h4>Events</h4>
+                </div>
+                <div class="left-area">
+                    <div class="left-wrapper">
+                        
+                        <div class="events">
+                            {% for item in events %}
+                            {% if item.id = event.id %}
+                            <div class="event-wrapper active-event">
+                                {% else %}
+                            <div class="event-wrapper">
+                                {% endif %}
+                                    <a href="/event/{{item.id}}/">
+                                        <p>{{item.name}}</p>
+                                        <p>{{item.date}}</p>
+                                        <p>{{item.location}}</p>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+<div class="event-center">
+    {% block center-header %}
+
+    <div id="item-list-header" class="center-header">
+        <h4>List</h4>
+    </div>
+
+    <div id="add-item-header" class="center-header initiallyHidden">
+        <h4>Add an Item</h4>
+    </div>
+
+    <div id="event-invite-header" class="center-header initiallyHidden">
+        <h4>Send Invites</h4>
+    </div>
+
+    <div id="pay-header" class="center-header initiallyHidden">
+        <h4>Pay</h4>
+    </div>
+
+    <span id="event-total-header" class="event-total-header active">
+            <span class="event-total">
+                <span class="total-dollar">$</span>
+                {{event_cost}}
+            </span>
+            <span class="event-members">
+                {{members_total}} people
+            </span>
+            <span class="event-per-person">
+                <span class="per-person-dollar">$</span>{{member_cost}} 
+            </span>
+            <span class="event-per-person-text">
+                per person
+            </span>
+    </span>
+    <span id="member-total-header" class="member-total-header member-total active">
+            <span class="member-total-text">
+                You:
+            </span>
+            <span class="member-total">
+                <span class="per-person-dollar">$</span>{{user_cost}} 
+            </span>
+    </span>
+
+    {% endblock %}
+    {% block center %}
+    <div class="event-invite-links">
+        <span id="item-list-button" class="event-choice active"><a href="#">List</a></span>
+        <span class="divider">|</span>
+        <span id="add-item-button" class="event-choice"><a href="#">Add</a></span>
+        <span class="divider">|</span>
+        <span id="event-invite-button" class="event-choice"><a href="#">Invite</a></span>
+    </div>
+        <div class="center-area">
+        <div class="center-wrapper">
+            
+
+
+
+<div id="item-list" class="item-list">
+    {% if items %}
+        {% for item in items %}
+        <div class="item">
+            <a  href="#">
+                <div class="item-id" style="display:none;">
+                    {{item.id}}
+                </div>
+                <div class="item-created" style="display:none;">
+                    date
+                </div>
+                <div class="item-link" style="display:none;">
+                    link
+                </div>
+                <div class="item-image" style="display:none;">
+                    image
+                </div>
+                <div class="item-left">
+                </div>
+                <div class="item-item">
+                    <div class="item-name">
+                        {{item.item}}
+                    </div>
+                </div>
+                <div class="item-creator">
+                    {% if item.creator == user %}
+                    You
+                    {% else %}
+                    {{item.creator.first_name}} {{item.creator.last_name}}
+                    {% endif %}
+                </div>
+                <div class="item-details">
+                    {{item.details}}
+                </div>
+
+                <div class="item-cost">
+                    ${{item.cost}}
+                </div>
+            </a>
+            <div class="item-buttons initiallyHidden">
+                {% if item.creator == user %}
+                <span id="item-edit-right" class="item-choice">
+                    <a href="#">Edit</a>
+                </span>
+                <span id="item-delete-right" class="item-choice">
+                    <form id="delete-form" method="post" action="." class="delete-form">
+                        <input id="id_delete" type="hidden" name="delete" value='delete' />
+                        <input id="id_item_id_delete" type="hidden" name="item" value={{ item.id }} />
+                        {% csrf_token %}
+                    </form>
+                    <span id="delete-button" class="delete-button">Delete</span>
+                </span>
+                <span id="item-confirm-right" class="item-choice">
+                    <a href="#">Confirm</a>
+                </span>
+                {% else %}
+                <span id="item-more-right" class="item-bring-more">
+                    <a href="#">Bring More</a>
+                </span>
+                {% endif %}
+            </div>
+            <div class="item-chat initiallyHidden">
+                <span id="item-comment-form">
+                    <form action="" method="post">
+                        <input id="id_comment_creator" type="hidden" name="creator" value= {{ user.id }} />
+                        <textarea id="id_comment_content-anon" type="text" name="content" maxlength="40" placeholder="Anonymous Comment" rows="2" cols="21"></textarea>
+
+                        <input id="id_comment_item" type="hidden" name="item" value= {{ item.id }} />
+
+                        <input id="id_comment_event" type="hidden" name="event" value= {{ event.id }} />
+
+                        <br />
+                        {% csrf_token %}
+                        <input class="btn" type="submit" value="Comment">
+                    </form> 
+                </span>
+                {% for comment in comments %}
+                {% if comment.item == item.id %}
+                <div>
+                    <span class="item-comment-date-right">
+                        {{comment.created}}
+                    </span>
+                    <span class="item-comment-content-right">
+                        {{comment.content}}
+                    </span>
+                    <br />
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+            <div class="empty-list">
+                <h4>Be the first to bring something</h4>
+                <br />
+                <span id="first-item-button" class="first-item-button"><a href="#">Add something</a></span>
+            </div>
+        {% endif %}
+</div>
+
+<div id="add-item" class="add-item initiallyHidden">
+    
+    <form method="post" action=".">
+        <input id="id_item_id" type="hidden" name="item_id" value='-1' />
+        <input id="id_event" type="hidden" name="event" value= {{ event.id }} />
+        <input id="id_creator" type="hidden" name="creator" value= {{ user.id }} />
+
+        <div class="form-row">
+            <label for="id_item" class="smalllabel"><h4>What does this party need?</h4></label>
+        </div>
+        <div class="form-row"> 
+            <input id="id_item" type="text" name="item" maxlength="50" class="input-row"/>
+        </div>
+        <div class="form-row">      
+            <label for="id_cost" class="smalllabel"><h4>How much will it cost?</h4></label>
+        </div>
+        <div class="form-row"> 
+            <input id="id_cost" type="text" name="cost" maxlength="10" class="input-row"/>
+        </div>
+        <div class="form-row">      
+            <label for="id_details" class="smalllabel"><h4>Any specifics?</h4></label> 
+        </div>
+        <div class="form-row">
+            <input id="id_details" type="text" name="details" maxlength="50" class="input-row"/>
+        </div>
+        {% csrf_token %}
+        <input id="id_button" class="item-button" value="Add to the list" type="submit">
+    </form>
+</div>
+
+<div id="event-invite" class="event-invite initiallyHidden">
+    <div class="event-invite-subheader">
+        <h2>New to dolores</h2>
+    </div>
+    <div class="event-invite-form">
+        
+        <form method="post" action=".">
+            <input id="id_event" type="hidden" name="event" value="{{event}}" />
+
+            <div class="form-row">
+                <label for="id_name" class="biglabel"><h4>Name</h4></label> 
+                <input id="id_name" type="text" name="name" maxlength="50" class="input-row"/>
+            </div>
+            <div class="form-row">      
+                <label for="id_email" class="biglabel"><h4>Email</h4></label> 
+                <input id="id_email" type="text" name="email" maxlength="50" class="input-row"/>
+            </div>
+            {% csrf_token %}
+            <button class="submit-button" type="submit">Send Invite</button>
+        </form>
+    </div>
+    <div class="event-invite-subheader initiallyHidden">
+        <h2>Already on dolores</h2>
+    </div>
+    <div class="event-invite-form initiallyHidden">
+        
+        <form method="post" action=".">
+            <input id="id_event" type="hidden" name="event" value={{event}} />
+
+            <div class="form-row">
+                <label for="id_name" class="biglabel"><h4>Name</h4></label> 
+                <input id="id_name" type="text" name="user_search" maxlength="50" class="input-row"/>
+            </div>
+            {% csrf_token %}
+            <button class="submit-button" type="submit">Send Invite</button>
+        </form>
+    </div>
+</div>
+
+<div id="pay" class="pay initiallyHidden">
+        <div class="event-summary">
+            <span class="eventlabel">The bill:</span> 
+            <span class="eventmoney">${{event_cost}}</span>
+            <span class="eventlabel">Average:</span> 
+            <span class="eventmoney">${{member_cost}}</span>
+            <span class="eventlabel">You paid:</span> 
+            <span class="eventmoney">${{user_cost}}</span>
+        </div>
+        <div class="members-owed">
+            <h2>Who paid?</h2>
+            {% for bill in bills_owed %}
+            {% if bill.member = user %}
+            <span class="billlabel">You</span>
+            {% else %} 
+            <span class="billlabel">{{bill.member.first_name}} {{bill.member.last_name}}</span>
+            {% endif %} 
+            <span class="billmoney">${{bill.net}}</span>
+            {% endfor %}
+        </div>
+        <div class="payment-form">
+        {% if member_cost <= user_cost %}
+        <div class="form-row">      
+            <label for="id_payment" class="smalllabel"><h4>Looks like you're owed money!</h4></label>
+        </div>
+        {% else %}
+        <form method="post" action=".">
+        <div class="form-row">      
+            <label for="id_payment" class="smalllabel"><h4>How much do you want to pay?</h4></label>
+        </div>
+        <div class="form-row"> 
+            <input id="id_payment" class="payment" type="text" name="payment" maxlength="10" class="input-row" value="{{net}}"/>
+        </div>
+        {% csrf_token %}
+        <input id="id_button" class="payment-button" value="Pay" type="submit">
+        </form>
+        {% endif %}
+    </div>
+</div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
+<div class="right">
+    {% block top-right-buttons %}
+    {% endblock %}
+    <div class="right-header">
+        <span class="right-choice right-chat"><a href="#">Chat</a></span>
+        <span class="divider">|</span>
+        <span class="right-choice right-details active"><a href="#">Details</a></span>
+        <span class="divider">|</span>
+        <span class="right-choice right-item"><a href="#">Item</a></span>
+    </div>
+    <div class="right-area">
+        <div class="right-wrapper">
+            {% block right %}
+            <div class="chat-wrapper-right initiallyHidden">
+                <form action="" method="post">
+                    <input id="id_comment_creator" type="hidden" name="creator" value= {{ user.id }} />
+                    <textarea id="id_comment_content" type="text" name="content" maxlength="100" ></textarea>
+
+                    <input id="id_comment_item" type="hidden" name="item" value="-1"/>
+
+                    <input id="id_comment_event" type="hidden" name="event" value= {{ event.id }} />
+
+                    <br />
+                    {% csrf_token %}
+                    <input class="btn" type="submit" value="Comment">
+                </form>
+                {% for comment in comments %}
+                {% if comment.item == -1 %}
+                <div class="comment-right">
+                    <span class="comment-creator-right">
+                        {{comment.creator.first_name}}
+                    </span>
+                    <span class="comment-date-right">
+                        {{comment.created}}
+                    </span>
+                    {% if comment.creator == user %}
+                    <span id="comment-delete-right" class="comment-buttons-right">
+                        <form id="delete-comment-form" method="post" action="." class="delete-comment-form initiallyidden">
+                            <input id="id_delete_comment" type="hidden" name="delete-comment" value='delete-comment' />
+                            <input id="id_comment_id_delete" type="hidden" name="comment" value={{ comment.id }} />
+                            {% csrf_token %}
+                        </form>
+                        <span id="delete-comment-button" class="delete-comment-button">Delete</span>
+                    </span>
+                    {% endif %}
+                    <br />
+                    <span class="comment-content-right">
+                        {{comment.content}}
+                    </span>
+                    <br />
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="details-wrapper-right">
+                <div class="event-name-right">
+                    {{event.name}}
+                </div>
+                <br />
+                <div class="event-location-right">
+                    Where: {{event.location}}
+                </div> 
+                <br />
+                <div class="event-time-right">
+                    When: {{event.date}}
+                </div> 
+                <br />
+                <div class="event-creator-right">
+                    Created by {{event.creator.first_name}} {{event.creator.last_name}}
+                </div> 
+                <br />
+                <div class="event-description-right">
+                    {{event.description}}
+                </div> 
+                <br />
+                <div class="event-header-right">
+                    Who's going?
+                </div>
+                {% for member in members %}
+                <div class="event-members-right">
+                    {{member.first_name}} {{member.last_name}}
+                </div> 
+                {% endfor %}
+            </div>
+            <div class="item-wrapper-right initiallyHidden">
+                <div class="item-buttons-right">
+                </div>
+                <div class="item-name-right item-attribute">
+                </div>
+                <div class="item-creator-right item-attribute">
+                </div>
+                <div class="item-details-right item-attribute">
+                </div>
+                <div class="item-cost-right item-attribute">
+                </div>
+                <div class="item-chat-right">
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+</div> 
+{% endblock %}
+
+{% block footer %}
+<script>
+$(".right-choice").click(function(){
+  $(".right-choice").removeClass("active");
+  if (!$(this).hasClass("active")) {
+    $(this).addClass("active");
+  }
+  if ($(this).hasClass("right-chat")) {
+    $('.chat-wrapper-right').show();
+    $('.details-wrapper-right').hide();
+    $('.item-wrapper-right').hide();
+  }
+  if ($(this).hasClass("right-details")) {
+    $('.chat-wrapper-right').hide();
+    $('.details-wrapper-right').show();
+    $('.item-wrapper-right').hide();
+  }
+  if ($(this).hasClass("right-item")) {
+    $('.chat-wrapper-right').hide();
+    $('.details-wrapper-right').hide();
+    $('.item-wrapper-right').show();
+  }
+});
+$("#item-list-button").click(function(){
+  // If this isn't already active
+  $(".event-choice").removeClass("active");
+  if (!$(this).hasClass("active")) {
+    // Remove the class from anything that is active
+    
+    // And make this active
+  $(this).addClass("active");
+  $("#add-item-header").hide();
+  $("#add-item").hide();
+  $("#event-invite-header").hide();
+  $("#event-invite").hide();
+  $("#item-list-header").show();;
+  $("#item-list").show();
+  $("#pay-header").hide();
+  $("#pay").hide();
+  $("#event-total-header").show();
+  $("#member-total-header").show();
+  $("#account-header").hide();
+  $("#account-details").hide();
+  $("#account-edit-pword").hide();
+  }
+});
+$("#add-item-button").click(function(){
+  // If this isn't already active
+  $(".event-choice").removeClass("active");
+  if (!$(this).hasClass("active")) {
+    // Remove the class from anything that is active
+    
+    // And make this active
+    $(this).addClass("active");
+    } 
+  $("#item-list-header").hide();
+  $("#item-list").hide();
+  $("#event-invite-header").hide();
+  $("#event-invite").hide();
+  $("#add-item-header").show();
+  $("#add-item").show();
+  $("#pay-header").hide();
+  $("#pay").hide();
+  $("#event-total-header").show();
+  $("#member-total-header").show();
+  $("#account-header").hide();
+  $("#account-details").hide();
+  $("#account-edit-pword").hide();
+});
+$("#first-item-button").click(function(){
+  $(".event-choice").removeClass("active");
+  if (!$("#add-item-button").hasClass("active")) {
+    // Remove the class from anything that is active
+    
+    // And make this active
+    $("#add-item-button").addClass("active");
+    } 
+  $("#item-list-header").hide();
+  $("#item-list").hide();
+  $("#event-invite-header").hide();
+  $("#event-invite").hide();
+  $("#add-item-header").show();
+  $("#add-item").show();
+  $("#pay-header").hide();
+  $("#pay").hide();
+  $("#event-total-header").show();
+  $("#member-total-header").show();
+  $("#account-header").hide();
+  $("#account-details").hide();
+  $("#account-edit-pword").hide();
+});
+$("#event-invite-button").click(function(){
+  // If this isn't already active
+  $(".event-choice").removeClass("active");
+  if (!$(this).hasClass("active")) {
+    // Remove the class from anything that is active
+    
+    // And make this active
+  $(this).addClass("active");
+  $("#add-item-header").hide();
+  $("#add-item").hide();
+  $("#item-list-header").hide();
+  $("#item-list").hide();
+  $("#event-invite-header").show();
+  $("#event-invite").show();
+  $("#pay-header").hide();
+  $("#pay").hide();
+  $("#event-total-header").show();
+  $("#member-total-header").show();
+  $("#account-header").hide();
+  $("#account-details").hide();
+  $("#account-edit-pword").hide();
+  }
+});
+$("#pay-button").click(function(){
+  $(".event-choice").removeClass("active");
+  $("#add-item-header").hide();
+  $("#add-item").hide();
+  $("#item-list-header").hide();
+  $("#item-list").hide();
+  $("#event-invite-header").hide();
+  $("#event-invite").hide();
+  $("#pay-header").show();
+  $("#pay").show();
+  $("#event-total-header").hide();
+  $("#member-total-header").hide();
+  $("#account-header").hide();
+  $("#account-details").hide();
+  $("#account-edit-pword").hide();
+});
+$("#account-button").click(function(){
+  $(".event-choice").removeClass("active");
+  $("#add-item-header").hide();
+  $("#add-item").hide();
+  $("#item-list-header").hide();
+  $("#item-list").hide();
+  $("#event-invite-header").hide();
+  $("#event-invite").hide();
+  $("#pay-header").hide();
+  $("#pay").hide();
+  $("#event-total-header").hide();
+  $("#member-total-header").hide();
+  $("#account-header").show();
+  $("#account-details").show();
+  $("#account-edit-pword").hide();
+  $("#home-wrapper").hide();
+  $("#welcome-header").hide();
+});
+$("#account-edit-button").click(function(){
+  $(".event-choice").removeClass("active");
+  $("#add-item-header").hide();
+  $("#add-item").hide();
+  $("#item-list-header").hide();
+  $("#item-list").hide();
+  $("#event-invite-header").hide();
+  $("#event-invite").hide();
+  $("#pay-header").hide();
+  $("#pay").hide();
+  $("#event-total-header").hide();
+  $("#member-total-header").hide();
+  $("#account-header").show();
+  $("#account-details").hide();
+  $("#account-edit-pword").show();
+});
+
+$("body").on("click", "#delete-button", function(){
+  $("#delete-form").submit();
+});
+
+$("body").on("click", "#delete-comment-button", function(){
+  $("#delete-comment-form").submit();
+});
+
+$("body").on("click", "#leaving-button", function(){
+  $("#leave-form").submit();
+});
+
+$(".item").click(function(){
+  $(".item").removeClass("active-item");
+  if (!$(this).hasClass("active")) {
+    $(this).addClass("active");
+  }
+  $(this).addClass("active-item");  
+  $(".right-choice").removeClass("active");
+  if (!$(".right-item").hasClass("active")) {
+    $(".right-item").addClass("active");
+  }
+  $('.chat-wrapper-right').hide();
+  $('.details-wrapper-right').hide();
+  $('.item-wrapper-right').show();
+  var buttons = $.trim($(this).find('.item-buttons').html());
+  var item_id = $.trim($(this).find('.item-id').html());
+  var creator = $.trim($(this).find('.item-creator').html());
+  var name = $.trim($(this).find('.item-name').html());
+  var cost = $.trim($(this).find('.item-cost').html());
+  var details = $.trim($(this).find('.item-details').html());
+  var chat = $.trim($(this).find('.item-chat').html());
+  $(".item-buttons-right").html(buttons);
+  $(".item-creator-right").html(creator);
+  $(".item-cost-right").html(cost);
+  $(".item-name-right").html(name);
+  $(".item-details-right").html(details);
+  $(".item-chat-right").html(chat);
+  $("body").on("click", "#item-edit-right", function(){
+      $(".event-choice").removeClass("active");
+      $("#item-list-header").hide();
+      $("#item-list").hide();
+      $("#event-invite-header").hide();
+      $("#event-invite").hide();
+      $("#add-item-header").show();
+      $("#add-item").show();
+      $("#add-item").show();
+      $("#id_item_id").val(item_id);
+      $("#id_item").val(name);
+      $("#id_cost").val(cost);
+      $("#id_details").val(details);
+      $("#id_button").val('Change it!');
+    });
+  $("body").on("click", "#item-more-right", function(){
+      $(".event-choice").removeClass("active");
+      $("#item-list-header").hide();
+      $("#item-list").hide();
+      $("#event-invite-header").hide();
+      $("#event-invite").hide();
+      $("#add-item-header").show();
+      $("#add-item").show();
+      $("#add-item").show();
+      $("#id_item_id").val('-1');
+      $("#id_item").val(name);
+      $("#id_cost").val('');
+      $("#id_details").val('');
+      $("#id_button").val('Bring it!');
+    });
+});
+
+$(".leaving").colorbox({rel:'popout', transition:'none', inline:true, width:'400px', height:'350px'});
+
+
+$("body").on("click", "#item-confirm-right", function(){
+});
+
+dgFlow = top.dgFlow || top.opener.top.dgFlow;
+    dgFlow.closeFlow();
+    top.close();
+
+</script>
+<script> 
+var dgFlow = new PAYPAL.apps.DGFlow({ trigger: 'submitBtn' }); 
+</script>>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "main/base2.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+    <div class="open">
+        <div class="login-header">
+            <img src="{{ MEDIA_URL }}templates/main/images/logo.png"/>
+        </div>
+        <div class="open-area">
+            <div class="event-join-text">
+                <h2>You got invited to an event</h2>
+                <h3>To join, login or register</h3>
+            </div>
+            <br />
+            <form action="" method="post">
+                <div class="form-padding">
+                <div class="form-row">
+                {% if form.errors %}
+                <h2>Your Username or Password was wrong. Try again!</h2>
+                <br />
+                {% endif %}
+                <label for="id_username" class="biglabel"><h4>Username</h4></label> 
+                <input id="id_username" type="text" name="login-username" maxlength="30" class="input-row"/>
+                </div>
+                <div class="form-row">
+                <label for="id_password1" class="biglabel"><h4>Password</h4></label> 
+                <input type="password" name="login-password" id="id_password" class="input-row"/>
+                <input type="hidden" name="login" value="1"/>
+                <input type="hidden" name="next" value="/home/"/>
+                </div>
+                <div class="submit-row"> 
+                {% csrf_token %}
+                <button type="submit" class="login-button">Login</button>
+            </div>
+            </form>
+        <br />
+            <form action="" method="post">
+                <div class="form-padding">
+                    <div class="form-row">
+                {{ register_form.first_name.errors }}
+                <label for="id_first_name" class="biglabel"><h4>First Name</h4></label> 
+                <input id="id_first_name" type="text" name="first_name" maxlength="30" class="input-row" />
+                </div>
+                 <div class="form-row">
+                {{ register_form.last_name.errors }}
+                <label for="id_last_name" class="biglabel"><h4>Last Name</h4></label> 
+                <input id="id_last_name" type="text" name="last_name" maxlength="30" class="input-row"/> 
+                </div>
+                <div class="form-row">
+                {{ register_form.username.errors }}
+                <label for="id_username" class="biglabel"><h4>Username</h4></label> 
+                <input id="id_username" type="text" name="username" maxlength="30" class="input-row"/>
+                </div>
+                <div class="form-row">
+                <span class="helptext"></span>
+                {{ register_form.password2.errors }}
+                <label for="id_password1" class="biglabel"><h4>Password</h4></label> 
+                <input type="password" name="password1" id="id_password1" class="input-row"/>
+                </div>
+                <div class="form-row">
+                <label for="id_password2" class="biglabel"><h4>Confirm</h4></label> 
+                <input type="password" name="password2" id="id_password2" class="input-row"/> 
+                </div>
+                <div class="form-row">
+                <span class="helptext"></span>
+                {{ register_form.email.errors }}
+                <label for="id_email" class="biglabel"><h4>Paypal Email</h4></label> 
+                <input id="id_email" type="text" name="email" maxlength="30" class="input-row"/>
+                </div>
+                <input type="hidden" name="register" value="1"/>
+                <div class="submit-row"> 
+                {% csrf_token %}
+                <button class="register-button" type="submit">Sign me up</button>
+            </div>
+            </form>
+            <br />
+            <button onclick="location.href='/'" type="button" class="no-thanks-button">No thanks</button>
+    </div>
+</div>
+{% endblock %}

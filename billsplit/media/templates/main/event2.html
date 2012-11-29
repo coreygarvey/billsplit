@@ -1,0 +1,34 @@
+{% extends "main/homebase.html" %}
+
+{% block title %}Event{% endblock %}
+
+	{% block top-right-buttons %}
+    <span id="pay-button" class="pay-button top-right-button">
+        <a href="#">Pay</a>
+    </span>
+    <span id="leave-button" class="leave-button top-right-button">
+        <a href="#leaving" class="leaving">Leave</a>
+    </span>
+    <div class="initiallyHidden">
+        <div id="leaving">
+            <h2>Leaving Already?</h2>
+            <br />
+            <h3>Remember, you'll need another invite to get back in.</h3>
+            <br />
+            <br />
+            <form id="leave-form" method="post" action="." class="leaving-form">
+                <input id="id_leave" type="hidden" name="leave" value='leave' />
+                <input id="id_event_leave" type="hidden" name="event" value={{ event.id }} />
+                {% csrf_token %}
+            </form>
+            <span id="leaving-button" class="leaving-button"><a href="#">Get me out</a></span>
+        </div>
+    </div>
+    {% endblock %}
+
+
+{% block top %}
+{% endblock %}
+
+
+

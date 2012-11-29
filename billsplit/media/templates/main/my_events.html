@@ -1,0 +1,80 @@
+{% extends "main/base.html" %}
+
+{% block title %}New Event{% endblock %}
+
+{% block content %}
+<a id="home" class="btn btn-inverse" href="/home/"><i class="icon-home icon-white"></i> Home</a>
+<div class="row-fluid">
+	<div id="navigation_area" class="pagination-centered">
+	<h2>Your Events</h2>
+	<br />
+	<br />
+	{% for event in events %}
+	
+	
+	<br />
+	<div class="btn-group">
+	  <button id={{event.id}} class="btn item-button send_button send_{{event.id}}">Send <i class="icon-envelope"></i></button>
+
+	  <span class="initiallyHidden send_done_{{event.id}}">
+	  <button id={{event.id}} class="btn btn-inverse item-button send_button ">Don't Send</i></button>
+	</span>
+
+	  <a href="/{{event.id}}/" class="btn event-button" type="button">
+	  	{{event.name}}
+	  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  	{{event.creator.first_name}} {{event.creator.last_name}}
+	  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  	{{event.date|date:"M d, Y" }}
+	  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  	{{event.location}}</a>
+	</div>
+<div class="initiallyHidden invite_form_{{event.id}}">
+	<div id="new_user_form"	class="half-form">
+		<h3>New to dolores</h3>
+	<form method="post" action=".">
+		<input id="id_event" type="hidden" name="event" value={{event.id}} />
+
+		<label for="id_name"><h4>Name</h4></label> 
+		<input id="id_name" type="text" name="name" maxlength="50" />  
+				<br />
+		<label for="id_email"><h4>Email</h4></label> 
+		<input id="id_email" type="text" name="email" maxlength="50" /><br />
+		<br />
+		{% csrf_token %}
+		<button class="btn" type="submit">Send Invite</button>
+	</form>
+	</div>
+	<div id="another_user_form" class="half-form">
+		<h3>Already on dolores</h3>
+	<form method="post" action=".">
+		<input id="id_event" type="hidden" name="event" value={{event}} />
+
+		<label for="id_name"><h4>Name</h4></label> 
+		<input id="id_name" type="text" name="user_search" maxlength="50" />  
+		<br />
+		{% csrf_token %}
+		<button class="btn" type="submit">Search</button>
+	</form>
+</div>
+</div>
+
+	{% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+<script>
+$(document).ready(function(){
+  $(".send_button").click(function(){
+  	select = $(this);
+    id = select.attr('id');
+  	$(".send_"+ id).toggle();
+  	$(".send_done_"+ id).toggle();
+    $(".invite_form_"+ id).toggle();
+    });
+  });
+ </script>
+ {% endblock %}

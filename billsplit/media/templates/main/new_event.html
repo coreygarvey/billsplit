@@ -1,0 +1,39 @@
+{% extends "main/homebase.html" %}
+
+{% block title %}New Event{% endblock %}
+
+{% block center %}
+<a id="home" class="btn btn-inverse" href="/home/"><i class="icon-home icon-white"></i> Home</a>
+<div class="row-fluid">
+	<div id="navigation_area" class="span12 pagination-centered">
+	<h1>Make an Event</h1>
+
+	{% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+
+	<form action="" method="post">
+		
+		<input id="id_creator" type="hidden" name="creator" value= {{ user.id }} />
+
+		<label for="id_name"><h4>Name</h4></label> 
+		<input id="id_name" type="text" name="name" maxlength="50" /> 
+
+		<label for="id_date"><h4>Date</h4></label> 
+		<input id="id_date" type="date" name="date" />
+
+		<label for="id_description"><h4>Description</h4></label> 
+		<textarea rows="4" cols="50" id="id_description" name="description"> </textarea>
+
+		<label for="id_location"><h4>Location</h4></label> 
+		<input id="id_location" type="text" name="location" maxlength="50" /> 
+		<br />
+		{% csrf_token %}
+		<input type="submit" value="Create Event">
+	</form>
+
+  </div>
+</div>
+{% endblock %}

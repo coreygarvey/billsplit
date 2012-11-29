@@ -1,0 +1,44 @@
+{% extends "main/base2.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+    <div class="open">
+        
+        <div class="open-area">
+            <div class="login-header">
+                <img src="{{ MEDIA_URL }}templates/main/images/logo.png"/>
+            </div>
+        <form action="" method="post">
+            <div class="form-padding">
+            <div class="form-row">
+            {% if form.errors %}
+            <h2>Your Username or Password was wrong. Try again!</h2>
+            <br />
+            {% endif %}
+            <label for="id_username" class="biglabel"><h4>Username</h4></label> 
+            <input id="id_username" type="text" name="username" maxlength="30" class="input-row"/>
+            </div>
+            <div class="form-row">
+            <label for="id_password1" class="biglabel"><h4>Password</h4></label> 
+            <input type="password" name="password" id="id_password1" class="input-row"/>
+            <input type="hidden" name="next" value="/home/"/>
+            </div>
+            <span class="forgot-password"><a href="/reset_password/">Forgot your password?</a></span>
+            <div class="submit-row"> 
+            {% csrf_token %}
+            <button type="submit" class="login-button">Login</button>
+
+        </div>
+        </form>
+        <br />
+            <div class="open-form">
+                <div class="form-row">
+            <h2>New to BillSplit?</h2>
+            </div>
+            <button onclick="location.href='/register/'" type="button" class="open-button">Sign up</button>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

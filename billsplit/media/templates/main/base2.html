@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title> BillSplit - {% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- styles -->
+    <link href="{{ MEDIA_URL }}templates/main/images/icon.png" rel="icon" type="image/png">
+	<link href="{{ MEDIA_URL }}templates/main/css/main2.css" rel="stylesheet">
+  <link href="{{ MEDIA_URL }}templates/main/css/colorbox.css" rel="stylesheet">
+  <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/ui-lightness/jquery-ui.css" rel="Stylesheet" />
+  
+    <script type="text/javascript" src="{{ MEDIA_URL }}templates/main/js/jquery.js"></script>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-36515913-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  {% block header %}{% endblock %}
+  </head>
+  <body>
+    {% block fbook %}
+        {% endblock %}
+  <div class="nav-bar">
+    {% block nav %}
+    {% endblock %}
+  </div>
+  <div id="user-area" class="user-area" style="position:static;">
+    <div id="user-events">
+      <div class="main">
+    {% block content %}
+    {% endblock %}
+      </div>
+    </div>
+  </div>
+
+
+  <!-- javascript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+  <script src="https://www.paypalobjects.com/js/external/dg.js"></script>
+  <script src="{{ MEDIA_URL }}templates/main/js/bootstrap/bootstrap.js"></script>
+  <script src="{{ MEDIA_URL }}templates/main/js/watermarkinput.js"></script>
+  <script src="{{ MEDIA_URL }}templates/main/js/colorbox.js"></script>
+
+
+
+  {% block footer %}{% endblock %}
+
+  </body>
+</html>

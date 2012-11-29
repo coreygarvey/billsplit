@@ -1,0 +1,52 @@
+{% extends "main/base2.html" %}
+
+{% block title %}Pay{% endblock %}
+
+{% block content %}
+    <div class="center">
+        <div class="center-area">
+    {% if user.is_authenticated %}
+
+    <h2>Hey, {{ user.first_name }}.</h2>
+
+    {% endif %}
+
+    {% if form %}
+        <div class="register-form-wrapper">
+    <form action="" method="post">
+        <div class="form-padding">
+            <div class="form-row">
+        <label for="id_amount" class="biglabel"><h4>Amount</h4></label> 
+        <input id="id_amount" type="text" name="amount" maxlength="3" class="input-row"/> 
+    </div>
+    <div lass="form-row">
+        <label for="id_email" class="biglabel"><h4>Email</h4></label> 
+        <input id="id_email" type="text" name="email" maxlength="30" class="input-row" /> 
+    </div>
+        <br />
+        {% csrf_token %}
+        <div class="submit-row">
+        <button class="btn btn-inverse" type="submit">Pay him</button>
+        </div>
+    </div>
+    </form>
+</div>
+    {% else %}
+
+    <form action="https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay" target="PPDGFrame"> 
+        <input id="type" type="hidden" name="expType" value="light"> 
+        <input id="paykey" type="hidden" name="paykey" value="{{paykey}}">
+        <input type="submit" id="submitBtn" value="Pay with PayPal">    
+    </form>
+        </div>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<script src="https://www.paypalobjects.com/js/external/dg.js"></script>
+<script> 
+    var dgFlow = new PAYPAL.apps.DGFlow({ trigger: 'submitBtn' }); 
+</script>
+{% endblock %}

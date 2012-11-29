@@ -1,0 +1,35 @@
+{% extends "main/base2.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+    <div class="open">
+        <div class="login-header">
+            <img src="{{ MEDIA_URL }}templates/main/images/logo.png"/>
+        </div>
+        <div class="open-area">
+        <div class="open-form-wrapper">
+            <div class="open-form">
+            	<div class="logged-out">
+	        		<h2>You've been logged out</h2>
+	        	</div>
+	        	<br />
+                
+            <div class="form-row">
+            <h2>Returning?</h2>
+        </div>
+        <div class="form-row">
+            <button onclick="location.href='/'" role="button" class="btn btn-large btn-success open-button" type="button">Login</button>
+        </div>
+        <div class="form-row">
+                    <h2>New to BillSplit?</h2>
+                </div>
+            <div class="form-row">
+            <button onclick="location.href='/register/'" role="button" class="btn btn-large btn-success open-button" type="button">Sign up</button>
+        </div>
+        </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

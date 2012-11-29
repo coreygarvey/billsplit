@@ -1,0 +1,57 @@
+{% extends "main/homebase.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block center-header %}
+    <div id="account-header" class="large-header">
+        <h4>Account Details</h4>
+    </div>
+{% endblock %}    
+{% block center %}    
+    <div class="center-area">
+        <div class="center-wrapper">
+            <div id="account-details" class="account-details">
+                <div class="form-row">
+                    Usernme: <span class="account-detail">{{user.username}}</span>
+                </div>
+                <div class="form-row">
+                    First name: <span class="account-detail">{{user.first_name}}</span>
+                </div>
+                <div class="form-row">
+                    Last name: <span class="account-detail">{{user.last_name}}</span>
+                </div>
+                <div class="form-row">
+                    PayPal Email: <span class="account-detail">{{user.email}}</span>
+                </div>
+                <br />
+                <input id="account-edit-button" class="edit-button" value="Edit" type="submit">
+                <br />
+                <span class="change-password-button">
+                    <a href="/password_change/">Change Password</a>
+                </span>
+            </div>
+            <div id="account-edit-pword" class="account-details initiallyHidden">
+                <form method="post" action=".">
+                    <div class="form-row">
+                        <label for="id_item" class="smalllabel"><h4>What is your password?</h4></label>
+                    </div>
+                    <input id="id_confirm" type="hidden" name="confirm" maxlength="30" class="input-row" value="confirm" />
+                    <input id="id_username" type="hidden" name="username" maxlength="30" class="input-row" value={{user.username}} />
+                    <div class="form-row"> 
+                        <input id="id_password" type="password" name="password" maxlength="50" class="password"/>
+                    </div>
+                    <br />
+                    {% csrf_token %}
+                    <input class="account-edit-pword-button" value="Edit Account" type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block right %}
+{% endblock %}
+
+
+
+

@@ -1,0 +1,6 @@
+Hey {{ name }},
+
+{{ sender }} invited you to come to {{ event }} on BillSplit, the coolest website on the net.
+
+To go to the event and join BillSplit, click the link below:
+{{ link }}

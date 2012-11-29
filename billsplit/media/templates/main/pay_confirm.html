@@ -1,0 +1,38 @@
+{% extends "main/homebase.html" %}
+
+{% block title %}Confirm{% endblock %}
+
+{% block center-header %}
+    <div id="pay-header" class="center-header">
+        <h4>Pay</h4>
+    </div>
+{% endblock %}
+{% block center %}
+        <div class="center-area">
+        	<div class="center-wrapper">
+        		<div class="pay-confirm-wrapper members-paid">
+                    <h2>Who you're paying</h2>
+                    {% for member, amount in paypalList.items %}
+                    <span class="billlabel">{{member.first_name}} {{member.last_name}}</span>
+                    <span class="billmoney">${{amount}}</span>
+                    {% endfor %}
+		    		<form action="https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay" target="PPDGFrame">
+				        <input id="type" type="hidden" name="expType" value="light"> 
+				        <input id="paykey" type="hidden" name="paykey" value="{{paykey}}">
+				        <input type="submit" id="submitBtn" class="paypal-button"value="Pay with PayPal">
+		    		</form>
+                    <br />
+                    <h3>Paypal isn't live yet, this is just a testing environment.</h3>
+		    	</div>
+		    </div>
+		</div>
+	</div>
+
+{% endblock %}
+
+            
+
+
+
+
+

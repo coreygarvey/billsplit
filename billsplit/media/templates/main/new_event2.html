@@ -1,0 +1,77 @@
+{% extends "main/homebase.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block center-header %}
+
+<div id="item-list-header" class="center-header">
+    <h4>A party, eh?</h4>
+</div>
+
+{% endblock %}
+
+
+{% block center %}
+    <div class="center-area">
+        <div class="center-wrapper">
+	            <br />
+	        <div class="new-event-form">
+	            <form action="" method="post">
+			
+					<input id="id_creator" type="hidden" name="creator" value= {{ user.id }} />
+
+					<div class="form-row">
+						<label for="id_occasion" class="biglabel"><h4>Occasion</h4></label> 
+						<input id="id_occasion" type="text" name="name" maxlength="50" class="input-row"/> 
+					</div>
+
+					<div class="form-row">
+						<label for="id_date" class="biglabel"><h4>Date</h4></label> 
+						<input id="id_date" type="date" name="date" />
+					</div>
+					<div class="form-row">
+						<label for="id_time" class="biglabel"><h4>Time</h4></label> 
+						<select id="id_hour" class="time" type="date" name="hour" >
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+						</select>
+						<select id="id_minutes" class="time" type="date" name="minutes">
+							<option value="00">00</option>
+							<option value="15">15</option>
+							<option value="30">30</option>
+							<option value="45">45</option>
+						</select>
+						<select id="id_daypart" class="time" type="date" name="daypart">
+							<option value="am">AM</option>
+							<option value="pm">PM</option>
+						</select>
+					</div>
+					<div class="form-row">
+						<label for="id_description" class="biglabel"><h4>Description</h4></label> 
+						<textarea rows="4" cols="35" id="id_description" name="description"></textarea>
+					</div>
+					<div class="form-row">
+						<label for="id_location" class="biglabel"><h4>Location</h4></label> 
+						<input id="id_location" type="text" name="location" maxlength="50" class="input-row"/>
+					</div>	
+					{% csrf_token %}
+					<button class="submit-button" type="submit">Let's throw this party!</button>
+				</form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+            
+{% block right %}
+{% endblock %}

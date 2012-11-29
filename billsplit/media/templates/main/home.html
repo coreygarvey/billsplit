@@ -1,0 +1,29 @@
+{% extends "main/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+  <div id="navigation_area" class="span12 pagination-centered">
+
+    {% if user.is_authenticated %}
+
+    <h2>Hey, {{ user.first_name }}.</2>
+
+    {% endif %}
+
+    <br />
+    <br />
+    {% if events %}
+
+    <a href="/events/" class="btn btn-large btn-success" type="button">Your Events</a>
+
+    {% endif %}
+
+    <a href="/new_event/" class="btn btn-large btn-success" type="button">Start a New Event</a>
+
+    <a href="/invite/" class="btn btn-large btn-success" type="button">Invite a Friend</a>
+
+  </div>
+</div>
+{% endblock %}

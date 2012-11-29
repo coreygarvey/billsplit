@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+
+{% block title %}New Event{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+	<div id="navigation_area" class="span12 pagination-centered">
+	<h1> Event</h1>
+
+	<h2>Your Events.</2>
+
+	{% for event in events %}
+	<div class="btn-group">
+	  <a class="btn">Send</a>
+	  <a href="/new_event/" class="btn" type="button">{{event.name}}   {{event.creator}}   {{event.date}}   {{event.location}}</a>
+	</div>
+
+  </div>
+</div>
+{% endblock %}
