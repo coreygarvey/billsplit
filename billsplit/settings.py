@@ -148,7 +148,7 @@ DEFAULT_FROM_EMAIL = 'Corey <corey@billsplit.com>'
 EMAIL_HOST = 'smtpout.secureserver.net'
 EMAIL_PORT = '3535'
 EMAIL_HOST_USER = 'corey@billsplit.co'
-EMAIL_HOST_PASSWORD = 'coreybg1'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 
 #event = Event.objects.get(id=event)
